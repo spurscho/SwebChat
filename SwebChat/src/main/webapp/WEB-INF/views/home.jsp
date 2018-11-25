@@ -9,7 +9,8 @@
 <h1>
 	Hello world
 	조기현
-	최선강
+	최선강�
+	....�
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
