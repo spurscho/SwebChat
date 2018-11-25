@@ -6,9 +6,8 @@
 </head>
 <body>
 <h1>
-	Hello worlddwaawlkd mawd
-	adamwdlwakme
-	awdklmawdklm
+	Hello world
+	최선�
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
