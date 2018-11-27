@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <?xml version="1.0" encoding="UTF-8"?>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -8,12 +8,13 @@
 <body>
 <h1>
 	Hello world
-	ì¡°ê¸°í
-	ìµì ê°ÂÂ
+	Ã¬Â¡Â°ÃªÂ¸Â°Ã­ÂÂ
+	Ã¬ÂµÂÃ¬ÂÂ ÃªÂ°ÂÃÂÃ
 	dkjdkjlakd
 	....
-	aaaa
-	안녕정아야
+	aaaaw
+	ìëì ìì¼
+	
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
