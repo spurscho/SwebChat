@@ -1,4 +1,4 @@
-package com.swebchat.member;
+package com.swebchat.member.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

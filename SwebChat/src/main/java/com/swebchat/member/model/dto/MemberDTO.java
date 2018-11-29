@@ -1,4 +1,4 @@
-package com.swebchat.member;
+package com.swebchat.member.model.dto;
 
 public class MemberDTO {
 	
