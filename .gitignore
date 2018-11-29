@@ -5,6 +5,7 @@ SwebChat/Users/David/Desktop/sts/workspace/SwebChat/target/m2e-wtp/web-resources
 
 # ETC
 */target/*
+*/web-resources/*
 
 # DB (왜 안돼!)
 root-context.xml
