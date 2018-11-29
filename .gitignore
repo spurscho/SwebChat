@@ -27,8 +27,6 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-pom.xml
-.properties
 
 # Eclipse Core
 .project
