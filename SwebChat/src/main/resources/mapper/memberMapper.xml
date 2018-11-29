@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="MemberMapper">
+	
+	
+	<!-- member -->
+	<insert id="insertMember" parameterType="com.rnbsoft.member.MemberDTO">
+		insert into member(id,pwd) values (#{id},#{pwd})
+	</insert>
+	
+	<select id="selectMember" parameterType="com.rnbsoft.member.MemberDTO" resultType="com.rnbsoft.member.MemberDTO">
+		select id,pwd from member where id = #{id} and pwd = #{pwd}
+	</select>
+
+	<update id="updateMember" parameterType="com.rnbsoft.member.MemberDTO">
+		update member set pwd = #{pwd} where id = #{id}
+	</update>
+		 
+	<delete id="deletedMember" parameterType="com.rnbsoft.member.MemberDTO">
+		delete from member where id = #{id}
+	</delete>
+
+</mapper>
+    
+    
