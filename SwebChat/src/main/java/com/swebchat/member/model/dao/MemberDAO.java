@@ -4,6 +4,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.swebchat.member.model.dto.MemberDTO;
+
 @Repository("memberDAO")
 public class MemberDAO {
 
