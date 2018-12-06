@@ -1,5 +1,8 @@
 package com.swebchat.member.model.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,17 +13,31 @@ import com.swebchat.member.model.dto.MemberDTO;
 public class MemberDAO {
 
 	@Autowired
-	private SqlSessionTemplate sessionTemplate;
+	private SqlSessionTemplate template;
 
-	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
-		this.sessionTemplate = sessionTemplate;
-	}
-
-	// 한 개의 데이터 조회
-	public MemberDTO getMemberData(String id) {
-
-		MemberDTO dto = sessionTemplate.selectOne("MemberMapper.selectMember", id);
-		return dto;
+	//회원등록
+	public int insertMember(MemberDTO dto) {
+		
+		return template.insert("insertMember", dto);
 		
 	}
+	
+	//회원목록
+	public List<MemberDTO> selectMember(String id){
+		
+		return template.selectList("selectMember", id);
+	}
+	
+	//정보수정
+	public int updateMember(String id) {
+		
+		return template.update("updateMember", id);
+	}
+	
+	//탈퇴
+	public int deleteMember(String id) {
+		
+		return template.delete("deleteMember", id);
+	}
+	
 }

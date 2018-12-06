@@ -19,11 +19,11 @@
 		select id,pwd from member where id = #{id} and pwd = #{pwd}
 	</select>
 
-	<update id="updateMember" parameterType="com.rnbsoft.member.MemberDTO">
+	<update id="updateMember" parameterType="String">
 		update member set pwd = #{pwd} where id = #{id}
 	</update>
 		 
-	<delete id="deletedMember" parameterType="com.rnbsoft.member.MemberDTO">
+	<delete id="deletedMember" parameterType="String">
 		delete from member where id = #{id}
 	</delete>
 
