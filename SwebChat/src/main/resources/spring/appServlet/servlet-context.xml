@@ -19,10 +19,27 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="1" />
 	</beans:bean>
 	
 	<context:component-scan base-package="com.rnbsoft.swebchat" />
 	
+	<!-- 파일 업로드시 파일 용량 제한 설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10000000" />
+	</beans:bean>
 	
+	<!-- 파일 다운을 위한 뷰리졸버는 따로 존재해야 함. 주의 사항 : id 속성을 지정하지 않는다. 여러개의 뷰리졸버를 지정할 때는 우선 순위를 매겨야 함
+		파일 다운을 위한 뷰리졸버는 가장 먼저 실행되도록 순서를 지정해야 함. 리턴된 뷰이름과 동일한 이름(id)의 뷰클래스(bean)가 있으면 자동으로 연결
+		실행하는 뷰리졸버임. -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0" />
+	</beans:bean>
+
+	<!-- 컨트롤러가 리턴하는 json 객체 출력용 뷰 -->
+	<beans:bean id="jsonView"
+		class="net.sf.json.spring.web.servlet.view.JsonView">
+	</beans:bean>
 	
 </beans:beans>
