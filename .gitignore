@@ -1,11 +1,8 @@
-
-SwebChat/Users/David/Desktop/sts/workspace/SwebChat/target/m2e-wtp/web-resources/META-INF/maven/com.rnbsoft/swebchat/pom.properties
-
 ### ADD ###
 
 # ETC
-*/target/*
-*/web-resources/*
+target
+web-resources
 
 # DB (왜 안돼!)
 root-context.xml
