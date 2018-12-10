@@ -1,3 +1,5 @@
+<%@page import="com.swebchat.member.model.dto.MemberDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,16 +10,19 @@
 </head>
 <body>
 	<table>
+		<% 
+		List<MemberDTO> list = (List<MemberDTO>)request.getAttribute("lists");
+		for(MemberDTO dto:list){
+		%>
 		<tr>
-			<td style="text-align: center;">${dto.ordernum }</td>
-			<td style="text-align: center;">${dto.id }</td>
-			<td style="text-align: center;">${dto.pname }</td>
-			<td style="text-align: center;">${dto.model}</td>
-			<td style="text-align: center;">${dto.pamount}</td>
-			<td style="text-align: center;">${dto.price }</td>
-			<td style="text-align: center;">${dto.totalprice }</td>
-			<td style="text-align: center;">${dto.orderdate }</td>
+			<td>
+			<%=dto.getId() %></a>
+			</td>
 		</tr>
+		<tr>
+			<td><%=dto.getPwd() %></td>
+		</tr>
+		<%} %>
 	</table>
 </body>
 </html>

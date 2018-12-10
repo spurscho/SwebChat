@@ -3,10 +3,12 @@ package com.swebchat.member.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.swebchat.member.model.dao.MemberDAO;
 import com.swebchat.member.model.dto.MemberDTO;
 
+@Component
 public class MemberServiceImpl implements MemberService{
 
 	@Autowired
@@ -16,6 +18,12 @@ public class MemberServiceImpl implements MemberService{
 	public int insertMember(MemberDTO dto) {
 		
 		return memberdao.insertMember(dto);
+	}
+
+	@Override
+	public List<MemberDTO> getMemberList() {
+		
+		return memberdao.getMemberList();
 	}
 
 	@Override
