@@ -16,7 +16,9 @@
 		%>
 		<tr>
 			<td>
-			<%=dto.getId() %></a>
+				<a href="http://localhost:9080/swebchat/applyChatPopup?id=<%=dto.getId()%>">
+				<%=dto.getId() %>
+				</a>
 			</td>
 		</tr>
 		<tr>

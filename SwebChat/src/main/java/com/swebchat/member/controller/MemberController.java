@@ -32,12 +32,19 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping("/list.do")
+	@RequestMapping("/list")
 	public String getList(HttpServletRequest req, HttpServletResponse res) throws Exception{
 		
 		List<MemberDTO> lists = service.getMemberList();
 		
 		req.setAttribute("lists", lists);
 		return "./member/memberList";
+	}
+	@RequestMapping("/applyChatPopup")
+	public String applyChat(String id,HttpServletRequest req, HttpServletResponse res) throws Exception{
+		
+		req.setAttribute("id", id);
+		
+		return "./member/applyChatPopup";
 	}
 }
