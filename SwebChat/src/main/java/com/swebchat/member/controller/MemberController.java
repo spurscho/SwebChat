@@ -1,6 +1,10 @@
 package com.swebchat.member.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +18,6 @@ import com.swebchat.member.model.dto.MemberDTO;
 import com.swebchat.member.model.service.MemberService;
 
 @Controller
-@SessionAttributes("loginMemberDTO")//세션유지
 public class MemberController {
 	
 	@Autowired
@@ -23,9 +26,18 @@ public class MemberController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public ModelAndView insertMember(MemberDTO dto, ModelAndView mav) {
 		
-		mav.setViewName("/member/join");//뷰의 이름
+		mav.setViewName("/member/join");//
 		mav.addObject("dto", "dto");
 		
 		return mav;
+	}
+	
+	@RequestMapping("/list.do")
+	public String getList(HttpServletRequest req, HttpServletResponse res) throws Exception{
+		
+		List<MemberDTO> lists = service.getMemberList();
+		
+		req.setAttribute("lists", lists);
+		return "./member/memberList";
 	}
 }

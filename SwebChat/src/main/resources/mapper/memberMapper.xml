@@ -5,25 +5,25 @@
     
     <mapper namespace="MemberMapper">
 	
-	<resultMap type="MemberDTO" id="resultMember">
+	<resultMap type="com.swebchat.member.model.dto.MemberDTO" id="resultMember">
 		<result property="id" column="id"/>
 		<result property="pwd" column="pwd"/>
 	</resultMap>
 	
 	<!-- member -->
-	<insert id="insertMember" parameterType="MemberDTO">
+	<insert id="insertMember" parameterType="com.swebchat.member.model.dto.MemberDTO">
 		insert into member(id,pwd) values (#{id},#{pwd})
 	</insert>
 	
-	<select id="selectMember" parameterType="com.rnbsoft.member.MemberDTO" resultMap="resultMember">
-		select id,pwd from member where id = #{id} and pwd = #{pwd}
+	<select id="getMemberList" resultType="com.swebchat.member.model.dto.MemberDTO">
+		select id,pwd from SwebChatDB.member
 	</select>
 
-	<update id="updateMember" parameterType="String">
+	<update id="updateMember" parameterType="java.lang.String">
 		update member set pwd = #{pwd} where id = #{id}
 	</update>
 		 
-	<delete id="deletedMember" parameterType="String">
+	<delete id="deletedMember" parameterType="java.lang.String">
 		delete from member where id = #{id}
 	</delete>
 
