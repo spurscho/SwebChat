@@ -19,12 +19,6 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<MemberDTO> selectMember(String id) {
-		
-		return memberdao.selectMember(id);
-	}
-
-	@Override
 	public int updateMember(String id) {
 		
 		return memberdao.updateMember(id);

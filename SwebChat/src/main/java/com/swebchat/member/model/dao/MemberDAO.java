@@ -17,17 +17,9 @@ public class MemberDAO {
 
 	//회원등록
 	public int insertMember(MemberDTO dto) {
-		
 		return template.insert("insertMember", dto);
-		
 	}
-	
-	//회원목록
-	public List<MemberDTO> selectMember(String id){
-		
-		return template.selectList("selectMember", id);
-	}
-	
+
 	//정보수정
 	public int updateMember(String id) {
 		

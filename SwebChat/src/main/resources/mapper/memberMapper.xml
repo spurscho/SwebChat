@@ -14,10 +14,6 @@
 	<insert id="insertMember" parameterType="MemberDTO">
 		insert into member(id,pwd) values (#{id},#{pwd})
 	</insert>
-	
-	<select id="selectMember" parameterType="com.rnbsoft.member.MemberDTO" resultMap="resultMember">
-		select id,pwd from member where id = #{id} and pwd = #{pwd}
-	</select>
 
 	<update id="updateMember" parameterType="String">
 		update member set pwd = #{pwd} where id = #{id}
