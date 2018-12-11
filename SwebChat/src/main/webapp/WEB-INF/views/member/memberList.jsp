@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%
+	String contextPath = request.getContextPath();
+%>
 <body>
 	<table>
 		<% 
@@ -16,7 +19,7 @@
 		%>
 		<tr>
 			<td>
-				<a href="http://localhost:9080/swebchat/applyChatPopup?id=<%=dto.getId()%>">
+				<a href="<%=contextPath %>/applyChatPopup?id=<%=dto.getId()%>">
 				<%=dto.getId() %>
 				</a>
 			</td>
