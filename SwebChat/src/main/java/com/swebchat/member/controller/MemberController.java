@@ -38,13 +38,13 @@ public class MemberController {
 		List<MemberDTO> lists = service.getMemberList();
 		
 		req.setAttribute("lists", lists);
-		return "./member/memberList";
+		return "member/memberList";
 	}
 	@RequestMapping("/applyChatPopup")
 	public String applyChat(String id,HttpServletRequest req, HttpServletResponse res) throws Exception{
 		
 		req.setAttribute("id", id);
 		
-		return "./member/applyChatPopup";
+		return "member/applyModal";
 	}
 }
