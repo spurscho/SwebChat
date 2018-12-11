@@ -23,6 +23,13 @@ public class MemberDAO {
 		
 	}
 	
+	//중복체크
+	public int selectUserId(String id) {
+		
+		return template.selectOne("selectUserId", id);
+		
+	}
+	
 	//회원목록
 	public List<MemberDTO> getMemberList(){
 		
@@ -39,6 +46,11 @@ public class MemberDAO {
 	public int deleteMember(String id) {
 		
 		return template.delete("deleteMember", id);
+	}
+
+	public MemberDTO selectMember(MemberDTO dto) {
+		
+		return template.selectOne("selectMember", dto);
 	}
 	
 }

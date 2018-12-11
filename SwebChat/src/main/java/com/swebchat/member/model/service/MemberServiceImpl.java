@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public int insertMember(MemberDTO dto) {
-		
+
 		return memberdao.insertMember(dto);
 	}
 
@@ -37,5 +37,16 @@ public class MemberServiceImpl implements MemberService{
 		
 		return memberdao.deleteMember(id);
 	}
+
+	@Override
+	public int selectUserId(String id) {
+		
+		return memberdao.selectUserId(id);
+	}
 	
+	@Override
+	public MemberDTO loginMember(MemberDTO dto) {
+		return memberdao.selectMember(dto);
+	}
+
 }

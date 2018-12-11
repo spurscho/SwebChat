@@ -11,10 +11,14 @@ public interface MemberService {
 	
 	int insertMember(MemberDTO dto);
 	
+	int selectUserId(String id);
+	
 	List<MemberDTO> getMemberList();
 	
 	int updateMember(String id);
 	
 	int deleteMember(String id);
+
+	MemberDTO loginMember(MemberDTO dto);
 	
 }
