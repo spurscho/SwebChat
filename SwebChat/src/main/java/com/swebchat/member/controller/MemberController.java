@@ -27,6 +27,14 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 
+	@RequestMapping("/mainPage")
+	public ModelAndView mainView(ModelAndView mav) {
+		
+		mav.setViewName("member/join");
+		
+		return mav;
+	}
+	
 	@RequestMapping(value="/join")
 	public String insertMember(HttpSession session) {
 		

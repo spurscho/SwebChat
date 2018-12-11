@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	시작 페이지
-	<a href="uni">unicast</a>
+	<%
+	request.getRequestDispatcher("mainPage").forward(request, response);
+	%>
 </body>
 </html>

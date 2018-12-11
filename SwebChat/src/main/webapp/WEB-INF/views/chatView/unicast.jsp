@@ -78,6 +78,9 @@
 			<input id="inputMessage" onkeyup="enterKey();">
 			<input type="submit" value="보내기" onclick="send();">
 			<input type="button" id="endBtn" value="나가기">
+			<form action="fileup" method="post" enctype="multipart/form-data" id="fileLoad">
+				<input type="file" name="file" id="file">
+			</form>
 		</fieldset>
 	</div>
 <script type="text/javascript">
@@ -148,7 +151,7 @@
 		var content = message[1];
 		
 		//전달받은 글이 없거나, 보낸 사람이 내가 연결한 사람이 아니거나 할 경우 아무 내용도 실행하지 않는다.
-		if(content == "" || !sender.match($("recvUser").val())) {
+		if(content == "" || !sender.match($("#recvUser").val())) {
 			
 		} else {
 			$textArea.html($textArea.html() + "<p class='chat_content other-side'>" + sender + " : " + content + "</p><br>");
@@ -178,6 +181,24 @@
 		$("#startBtn").css("display", "inline");
 		webSocket.send($("#chatId").val() + " 님이 퇴장하였습니다.");
 		webSocket.close();
+	});
+	
+	/* $("#file").on("click", function() {
+		$.ajax({
+			url: "fileup",
+			type: "post",
+			dataType: "json",
+			success: function(data, status, xhr) {
+				console.log(data);
+			},
+			error: function(request, status, errorData) {
+				
+			}
+		});
+	}); */
+	
+	$("#file").on("change", function() {
+		$inputMessage.val($("#file").val());
 	});
 </script>
 </body>
