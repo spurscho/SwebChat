@@ -1,12 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js?${verQuery}"></script>
 <!DOCTYPE htmlp>
 <html>
 <head>
 <meta charset=UTF-8">
 <title>1:1 채팅</title>
 <style type="text/css">
+	#messageWindow {
+		background: LightSkyBlue;
+		height: 300px;
+		overflow: auto;
+	}
 	
+	.chat_content {
+		background: rgb(255, 255, 102);
+		padding: 10px;
+		border-radius: 10px;
+		display: inline-block;
+		position: relative;
+		margin: 10px;
+		float: right;
+		clear: both;
+	}
+	
+	.chat_content:after {
+		content: '';
+		position: absolute;
+		right: 0;
+		top: 50%;
+		width: 0;
+		height: 0;
+		border: 20px solid transparent;
+		border-left-color: rgb(255, 255, 102);
+		border-right: 0;
+		border-top: 0;
+		margin-top: -3.5px;
+		margin-right: -10px;
+	}
+	
+	.other-side {
+		background: white;
+		float: left;
+		clear: both;
+	}
+	
+	.other-side:after {
+		content: '';
+		position: absolute;
+		right: 0;
+		top: 50%;
+		width: 0;
+		height: 0;
+		border: 20px solid transparent;
+		border-right-color: white;
+		border-left: 0;
+		border-top: 0;
+		margin-top: -3.5px;
+		margin-left: -10px;
+	}
+	
+	#chatbox {
+		display: none;
+	}
 </style>
 </head>
 <body>
@@ -16,7 +72,7 @@
 	<button id="startBtn">채팅하기</button>
 	
 	<!-- 채팅 구현 -->
-	<div>
+	<div id="chatbox">
 		<fieldset>
 			<div id="messageWindow"></div><br>
 			<input id="inputMessage" onkeyup="enterKey();">
@@ -32,12 +88,12 @@
 	var $textArea = $("#messageWindow");
 	
 	//전송할 문자열 기록
-	var $inputMessge = $("#inputMessage");
+	var $inputMessage = $("#inputMessage");
 	
 	function connection() {
 		//웹소켓 객체는 생성자를 통해 생성, 객체 생성시에 서버와 자동 연결
 		
-		webSocket = new WebSocket("ws://localhost:9000<%= request.getContextPath() %>/unicast");
+		webSocket = new WebSocket("ws://192.168.0.82:8880<%= request.getContextPath() %>/unicast");
 		
 		//웹소켓을 통해서 연결이 될 때 동작할 이벤트 핸들러
 		webSocket.onopen = function(e) {
@@ -117,7 +173,7 @@
 	});
 	
 	//나기기 버튼 클릭시 소켓 닫기
-	$("endBtn").on("click", function() {
+	$("#endBtn").on("click", function() {
 		$("chatbox").css("display", "none");
 		$("#startBtn").css("display", "inline");
 		webSocket.send($("#chatId").val() + " 님이 퇴장하였습니다.");
