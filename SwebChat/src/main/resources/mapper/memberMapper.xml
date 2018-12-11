@@ -12,20 +12,29 @@
 	
 	<!-- member -->
 	<insert id="insertMember" parameterType="com.swebchat.member.model.dto.MemberDTO">
-		insert into member(id,pwd) values (#{id},#{pwd})
+		insert into SwebChatDB.member(id,pwd) values (#{id},#{pwd})
 	</insert>
+	
+	<select id="selectMember" parameterType="com.swebchat.member.model.dto.MemberDTO" resultType="com.swebchat.member.model.dto.MemberDTO">
+		select id,pwd from SwebChatDB.member where id = #{id} and pwd = #{pwd}
+	</select>
 	
 	<select id="getMemberList" resultType="com.swebchat.member.model.dto.MemberDTO">
 		select id,pwd from SwebChatDB.member
 	</select>
 
 	<update id="updateMember" parameterType="java.lang.String">
-		update member set pwd = #{pwd} where id = #{id}
+		update SwebChatDB.member set pwd = #{pwd} where id = #{id}
 	</update>
 		 
 	<delete id="deletedMember" parameterType="java.lang.String">
-		delete from member where id = #{id}
+		delete from SwebChatDB.member where id = #{id}
 	</delete>
+	
+	<select id="selectUserId" parameterType="String" resultType="Integer">
+		select count(*) from SwebChatDB.member where id = #{id}
+	</select>
+	
 
 </mapper>
     
