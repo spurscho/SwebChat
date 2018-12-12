@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js?${verQuery}"></script>
 <!DOCTYPE htmlp>
 <html>
@@ -76,11 +77,12 @@
 		<fieldset>
 			<div id="messageWindow"></div><br>
 			<input id="inputMessage" onkeyup="enterKey();">
-			<input type="submit" value="보내기" onclick="send();">
+			<input type="button" value="보내기" onclick="send();">
 			<input type="button" id="endBtn" value="나가기">
-			<form action="" enctype="multipart/form-data" id="fileLoad">
-				<input type="file" name="file" id="file">
+			<form action="fileup" method="post" enctype="multipart/form-data" id="fileLoad">
+				<input type="file" name="fileinput" id="fileinput">
 			</form>
+			
 		</fieldset>
 	</div>
 <script type="text/javascript">
@@ -93,7 +95,9 @@
 	//전송할 문자열 기록
 	var $inputMessage = $("#inputMessage");
 	
-	var str = null;
+	var str = "";
+	
+	var tf = false;
 	
 	function connection() {
 		//웹소켓 객체는 생성자를 통해 생성, 객체 생성시에 서버와 자동 연결
@@ -132,21 +136,20 @@
 		if($inputMessage.val() == "") {
 			alert("전송할 메세지를 입력하세요.");
 		} else if(str != "") {
-			var form = $("#fileLoad")[0];
+			/* var form = $("#fileLoad")[0];
 			var formData = new FormData(form);
 			formData.append("file", $("#file").files);
 			
 			$.ajax({
-				url: "",
+				url: "fileup",
 				type: "post",
 				datatype: "json",
 				data: formData,
 				processData: false,
 				contentType: false,
-				enctype: "multipart/form-data",
 				success: function(data, status, xhr) {
 					console.log(data);
-					$textArea.html($textArea.html() + "<p class='chat_content'>나 : <a>" + $inputMessage.val() + "</a><p><br>");
+					$textArea.html($textArea.html() + "<p class='chat_content'>나 : <a href=''>" + $inputMessage.val() + "</a><p><br>");
 					
 					webSocket.send($("#chatId").val() + "|" + $inputMessage.val());
 					$inputMessage.val('');
@@ -155,12 +158,17 @@
 					console.log("에러");
 				}
 			});
+			str = null; */
+			
+			ajaxFile();
+			
+			str = "";
 			
 		} else {
 			//메세지 입력
 			$textArea.html($textArea.html() + "<p class='chat_content'>나 : " + $inputMessage.val() + "<p><br>");
 			
-			webSocket.send($("#chatId").val() + "|" + $inputMessage.val());
+			webSocket.send($("#chatId").val() + "|" + $inputMessage.val() + "|");
 			$inputMessage.val('');
 		}
 		
@@ -176,6 +184,8 @@
 		
 		//전송온 메세지
 		var content = message[1];
+		
+		var truefalse = message[2];
 		
 		//전달받은 글이 없거나, 보낸 사람이 내가 연결한 사람이 아니거나 할 경우 아무 내용도 실행하지 않는다.
 		if(content == "" || !sender.match($("#recvUser").val())) {
@@ -193,6 +203,37 @@
 	
 	function onClose(e) {
 		alert(e);
+	}
+	
+	function ajaxFile() {
+		var form = $("#fileLoad");
+		var formData = new FormData($("#fileLoad"));
+		
+		//var uploadFileList = Object.keys(fileList);
+		//var fileList = new Array();
+		//fileList[$("#fileinput").files];
+		//console.log(fileList);
+		formData.append("file", $('#fileinput').prop('files')[0]);
+		
+		$.ajax({
+			url: "fileup",
+			type: "post",
+			datatype: "json",
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(data, status, xhr) {
+				
+				$textArea.html($textArea.html() + "<p class='chat_content'>나 : "
+					+ "<a href='mfdown?ofile=" + data.fileName + "'>" + $inputMessage.val() + "</a><p><br>");
+				
+				webSocket.send($("#chatId").val() + "|" + $inputMessage.val() + "|" + tf);
+				$inputMessage.val('');
+			},
+			error: function(request, status, errorData) {
+				console.log("에러");
+			}
+		});
 	}
 	
 	$("#startBtn").on("click", function() {
@@ -224,9 +265,9 @@
 		});
 	}); */
 	
-	$("#file").on("change", function() {
-		str = $("#file").val().split("\\");
-		
+	$("#fileinput").on("change", function() {
+		str = $("#fileinput").val().split("\\");
+		tf = true;
 		$inputMessage.val(str[2]);
 	});
 </script>
