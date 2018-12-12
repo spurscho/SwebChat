@@ -15,49 +15,41 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<style>
-.td{
-	padding: 20px;
-	margin: 20px;
+<script type="text/javascript">
+	function showPopup(idFromList){
+		  window.name = "memberList";
+		  var screenW = screen.availWidth;  // 스크린 가로사이즈
+		  var screenH = screen.availHeight; // 스크린 세로사이즈
+		  var popW = 300; 					// 띄울창의 가로사이즈
+		  var popH = 180; 					// 띄울창의 세로사이즈
+		  var posL=( screenW-popW ) / 2;	// 좌측정렬
+		  var posT=( screenH-popH ) / 2;	// 우측정렬
+		  window.open('applyChatPopup?yourId='+idFromList,'채팅신청','width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
+	}
 
+</script>
+<style>
+td{
+	padding: 20px;
 }
 
 </style>
 <body>
 	<table align="center">
+		<tr>
+			<td>아이디</td>
+			<td>신청버튼</td>
+		</tr>
 		<%
 			List<MemberDTO> list = (List<MemberDTO>) request.getAttribute("lists");
 			for (MemberDTO dto : list) {
 		%>
 		<tr>
 			<td>
-				<a href="<%=contextPath%>/applyChatPopup?id=<%=dto.getId()%>"> 
-					<%=dto.getId()%>
-				</a>
+				<%=dto.getId()%>
 			</td>
 			<td>
-				<%=dto.getPwd()%>
-			</td>
-			<td>
-				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"
-				style="height: 30%;font-size: 10pt;text-align: center;">
-				 신청
-				</button>
-				<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			    	<div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel"><%=dto.getId()%>에게 해당 회원에게 채팅을 신청하시렵니까?</h4>
-				    </div>
-				    <div class="modal-footer" style="text-align: center;">
-				      <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-				      <button type="button" class="btn btn-primary">신청하기</button>
-				    </div>
-			    </div>
-			  </div>
-			</div>
+				<button type="button" onclick="showPopup('<%=dto.getId()%>');">신청</button>
 			</td>
 		</tr>
 		<%
