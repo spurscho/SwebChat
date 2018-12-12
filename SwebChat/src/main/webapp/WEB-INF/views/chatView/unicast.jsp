@@ -97,7 +97,8 @@
 	
 	var str = "";
 	
-	var tf = false;
+	var tf = "";
+	var filen = "";
 	
 	function connection() {
 		//웹소켓 객체는 생성자를 통해 생성, 객체 생성시에 서버와 자동 연결
@@ -168,7 +169,7 @@
 			//메세지 입력
 			$textArea.html($textArea.html() + "<p class='chat_content'>나 : " + $inputMessage.val() + "<p><br>");
 			
-			webSocket.send($("#chatId").val() + "|" + $inputMessage.val() + "|");
+			webSocket.send($("#chatId").val() + "|" + $inputMessage.val());
 			$inputMessage.val('');
 		}
 		
@@ -187,14 +188,19 @@
 		
 		var truefalse = message[2];
 		
+		var filen = message[3];
+		
 		//전달받은 글이 없거나, 보낸 사람이 내가 연결한 사람이 아니거나 할 경우 아무 내용도 실행하지 않는다.
 		if(content == "" || !sender.match($("#recvUser").val())) {
+			
+		} else if(truefalse) {
+			$textArea.html($textArea.html() + "<p class='chat_content other-side'>" + sender + " : <a href='mfdown?ofile=" + filen + "'>" + content + "</p><br>");
 			
 		} else {
 			$textArea.html($textArea.html() + "<p class='chat_content other-side'>" + sender + " : " + content + "</p><br>");
 			
-			$textArea.scollTop($textArea.height());
 		}
+		$textArea.scollTop($textArea.height());
 	}
 	
 	function onError(e) {
@@ -223,11 +229,12 @@
 			processData: false,
 			contentType: false,
 			success: function(data, status, xhr) {
-				
+				filen = data.fileName;
+				console.log(filen);
 				$textArea.html($textArea.html() + "<p class='chat_content'>나 : "
 					+ "<a href='mfdown?ofile=" + data.fileName + "'>" + $inputMessage.val() + "</a><p><br>");
 				
-				webSocket.send($("#chatId").val() + "|" + $inputMessage.val() + "|" + tf);
+				webSocket.send($("#chatId").val() + "|" + $inputMessage.val() + "|" + tf + "|" + filen);
 				$inputMessage.val('');
 			},
 			error: function(request, status, errorData) {
@@ -268,6 +275,7 @@
 	$("#fileinput").on("change", function() {
 		str = $("#fileinput").val().split("\\");
 		tf = true;
+		
 		$inputMessage.val(str[2]);
 	});
 </script>
