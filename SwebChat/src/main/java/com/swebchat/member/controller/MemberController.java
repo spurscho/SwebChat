@@ -99,7 +99,7 @@ public class MemberController {
 	@RequestMapping(value="/updated", method = RequestMethod.GET)
 	public String updated(HttpSession session, MemberDTO dto) {
 		String id = (String) session.getAttribute("id");
-		dto.setId(id);
+		dto.set
 
 		if (id == null) {
 			return "member/login";
