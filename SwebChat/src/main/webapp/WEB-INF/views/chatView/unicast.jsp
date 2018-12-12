@@ -78,7 +78,7 @@
 			<input id="inputMessage" onkeyup="enterKey();">
 			<input type="submit" value="보내기" onclick="send();">
 			<input type="button" id="endBtn" value="나가기">
-			<form action="fileup" method="post" enctype="multipart/form-data" id="fileLoad">
+			<form action="" enctype="multipart/form-data" id="fileLoad">
 				<input type="file" name="file" id="file">
 			</form>
 		</fieldset>
@@ -92,6 +92,8 @@
 	
 	//전송할 문자열 기록
 	var $inputMessage = $("#inputMessage");
+	
+	var str = null;
 	
 	function connection() {
 		//웹소켓 객체는 생성자를 통해 생성, 객체 생성시에 서버와 자동 연결
@@ -129,6 +131,31 @@
 		//메세지 입력하지 않은 경우
 		if($inputMessage.val() == "") {
 			alert("전송할 메세지를 입력하세요.");
+		} else if(str != "") {
+			var form = $("#fileLoad")[0];
+			var formData = new FormData(form);
+			formData.append("file", $("#file").files);
+			
+			$.ajax({
+				url: "",
+				type: "post",
+				datatype: "json",
+				data: formData,
+				processData: false,
+				contentType: false,
+				enctype: "multipart/form-data",
+				success: function(data, status, xhr) {
+					console.log(data);
+					$textArea.html($textArea.html() + "<p class='chat_content'>나 : <a>" + $inputMessage.val() + "</a><p><br>");
+					
+					webSocket.send($("#chatId").val() + "|" + $inputMessage.val());
+					$inputMessage.val('');
+				},
+				error: function(request, status, errorData) {
+					console.log("에러");
+				}
+			});
+			
 		} else {
 			//메세지 입력
 			$textArea.html($textArea.html() + "<p class='chat_content'>나 : " + $inputMessage.val() + "<p><br>");
@@ -198,7 +225,9 @@
 	}); */
 	
 	$("#file").on("change", function() {
-		$inputMessage.val($("#file").val());
+		str = $("#file").val().split("\\");
+		
+		$inputMessage.val(str[2]);
 	});
 </script>
 </body>
