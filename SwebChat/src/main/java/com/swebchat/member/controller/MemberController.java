@@ -56,7 +56,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/join_ok", method=RequestMethod.POST)
 	public String join_ok(MemberDTO dto) {
-
+	
 		service.insertMember(dto);
 
 		return "/member/join_ok";
@@ -146,15 +146,19 @@ public class MemberController {
 	public String getList(HttpServletRequest req, HttpServletResponse res) throws Exception{
 		
 		List<MemberDTO> lists = service.getMemberList();
-		
 		req.setAttribute("lists", lists);
 		return "member/memberList";
 	}
+	
 	@RequestMapping("/applyChatPopup")
-	public String applyChat(String id,HttpServletRequest req, HttpServletResponse res) throws Exception{
+	public String applyChat(String yourId,HttpServletRequest req,HttpSession session) throws Exception{
 		
-		req.setAttribute("id", id);
+		//String myId = (String) session.getAttribute("id");
+		String myId = "my";
 		
-		return "member/applyModal";
+		req.setAttribute("myId", myId);
+		req.setAttribute("yourId",yourId);
+		
+		return "member/applyPopup";
 	}
 }

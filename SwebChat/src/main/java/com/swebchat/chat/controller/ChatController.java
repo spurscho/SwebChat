@@ -3,7 +3,9 @@ package com.swebchat.chat.controller;
 import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,18 +17,24 @@ import org.springframework.web.servlet.ModelAndView;
 public class ChatController {
 
 	@RequestMapping("/uni")
-	public ModelAndView moveUni(ModelAndView mav) {
+	public ModelAndView moveUni(ModelAndView mav, HttpServletRequest req) {
 		
 		mav.setViewName("chatView/unicast");
 		
+		String myId = req.getParameter("myId");
+		String yourId = req.getParameter("yourId");
+		
+		System.out.println("myId= "+myId+", yourId= "+yourId);
 		return mav;
 	}
 	
-	@RequestMapping(value="fileup", method=RequestMethod.POST)
+	@RequestMapping(value="/fileup", method=RequestMethod.POST)
 	public ModelAndView fileUpload(ModelAndView mav,HttpServletRequest request, @RequestParam(name="file")	MultipartFile file) {
 		
-		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadFiles");
+		System.out.println("file : " + file.getOriginalFilename());
 		
+		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadFiles");
+		System.out.println(savePath);
 		String fileName = file.getOriginalFilename();
 		
 		try {
@@ -35,7 +43,7 @@ public class ChatController {
 			file.transferTo(filePath);
 			
 			mav.addObject("fileName", fileName);
-			mav.setViewName("member/join");
+			mav.setViewName("jsonView");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
