@@ -12,15 +12,9 @@
 login 완료
 <a href="/swebchat/logout">로그아웃</a>
 
-
-<script type="text/javascript">
-function name() {
-	
-	var id = "${dto.id}"
-	
-}
-
-
+<script>
+window.alert("${msg}");
+window.location.href="/howooo/search/main";
 </script>
 </body>
 </html>
