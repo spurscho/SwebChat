@@ -22,11 +22,13 @@ public class ChatController {
 		return mav;
 	}
 	
-	@RequestMapping(value="fileup", method=RequestMethod.POST)
+	@RequestMapping(value="/fileup", method=RequestMethod.POST)
 	public ModelAndView fileUpload(ModelAndView mav,HttpServletRequest request, @RequestParam(name="file")	MultipartFile file) {
 		
-		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadFiles");
+		System.out.println("file : " + file.getOriginalFilename());
 		
+		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadFiles");
+		System.out.println(savePath);
 		String fileName = file.getOriginalFilename();
 		
 		try {
@@ -35,7 +37,7 @@ public class ChatController {
 			file.transferTo(filePath);
 			
 			mav.addObject("fileName", fileName);
-			mav.setViewName("member/join");
+			mav.setViewName("jsonView");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

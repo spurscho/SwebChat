@@ -56,7 +56,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/join_ok", method=RequestMethod.POST)
 	public String join_ok(MemberDTO dto) {
-
+	
 		service.insertMember(dto);
 
 		return "/member/join_ok";
