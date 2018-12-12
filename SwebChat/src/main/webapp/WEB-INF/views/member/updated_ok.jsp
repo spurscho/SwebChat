@@ -8,7 +8,7 @@
 </head>
 <body>
 
-회원가입완료
+수정완료
 
 </body>
 </html>

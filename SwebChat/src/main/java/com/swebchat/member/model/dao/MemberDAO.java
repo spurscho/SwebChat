@@ -37,15 +37,15 @@ public class MemberDAO {
 	}
 	
 	//정보수정
-	public int updateMember(String id) {
+	public int updateMember(MemberDTO dto) {
 		
-		return template.update("updateMember", id);
+		return template.update("updateMember", dto);
 	}
 	
 	//탈퇴
-	public int deleteMember(String id) {
+	public int deleteMember(MemberDTO dto) {
 		
-		return template.delete("deleteMember", id);
+		return template.delete("deleteMember", dto);
 	}
 
 	public MemberDTO selectMember(MemberDTO dto) {

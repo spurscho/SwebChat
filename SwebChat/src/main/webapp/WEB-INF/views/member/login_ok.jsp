@@ -4,17 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js?${verQuery}"></script>
 <title>Insert title here</title>
 </head>
 <body>
 
+
 login 완료
 <a href="/swebchat/logout">로그아웃</a>
+<a href="/swebchat/updated">정보수정</a>
+<a href="/swebchat/deleted">회원탈퇴</a>
 
-<script>
-window.alert("${msg}");
-window.location.href="/howooo/search/main";
-</script>
 </body>
 </html>

@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +22,14 @@ import org.springframework.web.servlet.ModelAndView;
 public class ChatController {
 
 	@RequestMapping("/uni")
-	public ModelAndView moveUni(ModelAndView mav) {
+	public ModelAndView moveUni(ModelAndView mav, HttpServletRequest req) {
 		
 		mav.setViewName("chatView/unicast");
 		
+		String myId = req.getParameter("myId");
+		String yourId = req.getParameter("yourId");
+		
+		System.out.println("myId= "+myId+", yourId= "+yourId);
 		return mav;
 	}
 	
