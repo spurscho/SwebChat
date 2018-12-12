@@ -52,11 +52,11 @@
 							<i class="fa fa-user"></i>
 							<div class="gaadiex-list-item-text">
 								<h3>
-									<a href="#"><%=dto.getId() %></a>
+									<a style="color: purple;"><%=dto.getId() %></a>
 									<input type="button" class="btn-primary" value="신청" onclick="showPopup('<%=dto.getId()%>');" style="float: right;">
 								</h3>
-								<h4>Do you want to apply chatting?</h4>
-								<p>I'll be in your neighborhood doing errands</p>
+								<h4>Do you want to apply chatting to him?</h4>
+								<p>I'll be your chatting friend</p>
 							</div>
 						</div>
 					</div>

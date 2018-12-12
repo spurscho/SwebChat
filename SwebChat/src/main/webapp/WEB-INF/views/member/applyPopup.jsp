@@ -6,16 +6,16 @@
 <title>채팅신청</title>
 <meta charset="UTF-8">
 </head>
+<link rel="stylesheet" href="./resources/css/memberList.css"/>
 <style>
-button{
-	width: 100px; 
-	height: 50px;
-	margin: 10px;
-	text-align: center;
-	vertical-align: center;
+body{
+	background-color: white;
 }
 .title{
 	font-size: 10pt;
+}
+td{
+	padding-top: 10px;
 }
 </style>
 <script type="text/javascript">
@@ -40,12 +40,12 @@ button{
 				</p>
 			</td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<td>
-				<button type="button" onclick="parent.window.close();">취소</button>
+				<input class="btn-primary" type="button" onclick="parent.window.close();" value="취소">
 			</td>
 			<td>
-				<button type="button" onclick="sendIt();">신청</button>
+				<input class="btn-primary" type="button" onclick="sendIt();" value="신청">
 				<input type="hidden" name="yourId" value="${yourId }">
 				<input type="hidden" name="myId" value="${myId }">
 			</td>
