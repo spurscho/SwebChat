@@ -15,9 +15,9 @@ public interface MemberService {
 	
 	List<MemberDTO> getMemberList();
 	
-	int updateMember(String id);
+	int updateMember(MemberDTO dto);
 	
-	int deleteMember(String id);
+	int deleteMember(MemberDTO dto);
 
 	MemberDTO loginMember(MemberDTO dto);
 	

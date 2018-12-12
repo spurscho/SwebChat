@@ -23,11 +23,11 @@
 		select id,pwd from SwebChatDB.member
 	</select>
 
-	<update id="updateMember" parameterType="java.lang.String">
+	<update id="updateMember" parameterType="com.swebchat.member.model.dto.MemberDTO">
 		update SwebChatDB.member set pwd = #{pwd} where id = #{id}
 	</update>
 		 
-	<delete id="deletedMember" parameterType="java.lang.String">
+	<delete id="deleteMember" parameterType="com.swebchat.member.model.dto.MemberDTO">
 		delete from SwebChatDB.member where id = #{id}
 	</delete>
 	

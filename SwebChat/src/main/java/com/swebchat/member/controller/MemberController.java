@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.annotation.Commit;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,7 +60,7 @@ public class MemberController {
 
 		service.insertMember(dto);
 
-		return "/member/join_ok";
+		return "redirect:/login";
 	}
 	
 	@RequestMapping(value = "/login")
@@ -67,17 +68,8 @@ public class MemberController {
 		
 		return "member/login";
 	}
-
-	@RequestMapping(value = "/loginFail")
-	public ModelAndView loginFail() throws Exception {
-
-		ModelAndView mav = new ModelAndView("/member/loginFail");
-		mav.addObject("msg", "아이디, 비밀번호를 확인하세요");
-
-		return mav;
-	}
-
-	@RequestMapping(value="/login_ok", method = RequestMethod.POST)
+	
+	@RequestMapping(value="/login_ok", method =RequestMethod.POST)
 	public String login_ok(MemberDTO dto, HttpSession session) {
 		MemberDTO result = service.loginMember(dto);
 
@@ -89,14 +81,14 @@ public class MemberController {
 		}
 	}
 
-	@RequestMapping(value="/logout", method = RequestMethod.GET)	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)	
 	public String logout(HttpSession session) {
 		session.removeAttribute("id");
 		session.invalidate();
 		return "redirect:/login";
 	}
 
-	@RequestMapping(value="/updated", method = RequestMethod.GET)
+	@RequestMapping(value="/updated", method=RequestMethod.GET)
 	public String updated(HttpSession session, MemberDTO dto) {
 		String id = (String) session.getAttribute("id");
 		dto.setId(id);
@@ -108,15 +100,17 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value="/updated_ok", method = RequestMethod.POST)
+	@RequestMapping(value="/updated_ok", method=RequestMethod.POST) 
 	public String updated_ok(MemberDTO dto, HttpSession session) {
 		String id = (String) session.getAttribute("id");
+		
 		dto.setId(id);
-		service.updateMember(id);
-		return "redirect:/search/main";
+		service.updateMember(dto);
+		
+		return "member/updated_ok";
 	}
 	
-	@RequestMapping(value="/deleted" , method = RequestMethod.GET)
+	@RequestMapping(value="/deleted" , method=RequestMethod.GET)
 	public String deleted(HttpSession session, MemberDTO dto) {
 		String id = (String) session.getAttribute("id");
 		dto.setId(id);
@@ -128,13 +122,13 @@ public class MemberController {
 		}
 	}
 
-	@RequestMapping(value="/deleted_ok", method = RequestMethod.POST)
+	@RequestMapping(value="/deleted_ok", method=RequestMethod.POST)
 	public String deleted_ok(MemberDTO dto, HttpSession session) {
 		
 		String id = (String) session.getAttribute("id");
 		dto.setId(id);
 
-		service.deleteMember(id);
+		service.deleteMember(dto);
 		
 		session.removeAttribute("id");
 		session.invalidate();

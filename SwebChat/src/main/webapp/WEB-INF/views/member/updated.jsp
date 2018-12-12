@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,11 +14,13 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
-function deleted() {
+function updated(){
+	
 	var userpwd = $("#pwd").val();
 	var userpwd2 = $("#re-pwd").val();
 	
-	if (userpwd.length == 0) {
+	if(userpwd.length==0){
+		
 		alert("비밀번호를 입력해 주세요.");
 		$("#pwd").focus();
 		return false;
@@ -29,19 +32,19 @@ function deleted() {
 		return false;
 	}
 	
-	if(confirm("탈퇴하시겠습니까?")){
-		$("#myForm").submit();	
+	if(confirm("수정하시겠습니까?")){
+		
+		 $("#myForm").submit();
 	}
-	
 }
 </script>
 <body>
 
-<%-- <form action="/swebchat/deleted_ok" method="post" name="myForm" id="myForm">
+<%-- <form action="/swebchat/updated_ok" method="post" name="myForm" id="myForm">
 
 아이디 : ${sessionScope.id}
 패스워드 : <input type="password" id="pwd" name="pwd">
-<input type="button" value="OK" onclick="deleted();">
+<input type="button" value="OK" onclick="updated();">
 
 </form> --%>
 
@@ -53,8 +56,8 @@ function deleted() {
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 
-			<form action="/swebchat/deleted_ok" method="post" id="myForm" class="fh5co-form animate-box" data-animate-effect="fadeIn">
-				<h2>LEAVE</h2>
+			<form action="/swebchat/updated_ok" method="post" id="myForm" class="fh5co-form animate-box" data-animate-effect="fadeIn">
+				<h2>UPDATE</h2>
 					<div class="form-group" style="align-content: center;">
 						<label for="name" class="sr-only">Id</label>
 						<h3>${sessionScope.id}</h3>
@@ -68,7 +71,7 @@ function deleted() {
 						<input type="password" class="form-control" id="re-pwd" placeholder="Re-type Password" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<input type="button" value="Leave" class="btn btn-primary" onclick="deleted();">
+						<input type="button" value="Update" class="btn btn-primary" onclick="updated();">
 					</div>
 				</form>
 

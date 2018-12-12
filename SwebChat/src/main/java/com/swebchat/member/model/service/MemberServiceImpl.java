@@ -27,15 +27,15 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int updateMember(String id) {
+	public int updateMember(MemberDTO dto) {
 		
-		return memberdao.updateMember(id);
+		return memberdao.updateMember(dto);
 	}
 
 	@Override
-	public int deleteMember(String id) {
+	public int deleteMember(MemberDTO dto) {
 		
-		return memberdao.deleteMember(id);
+		return memberdao.deleteMember(dto);
 	}
 
 	@Override
