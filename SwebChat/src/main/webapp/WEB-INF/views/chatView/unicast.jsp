@@ -61,10 +61,6 @@
 		margin-left: -10px;
 	}
 	
-	#chatbox {
-		display: none;
-	}
-	
 	#inputMessage {
 		width: 1000px;
 		height: 50px;
@@ -76,7 +72,7 @@
 <body>
 	내 ID : ${ dto.id }<input type="hidden" id="chatId" size="10" value="${ dto.id }"><br>
 	상대방 ID : ${ yourId } <input type="hidden" id="recvUser" size="10" value="${ yourId }"><br>
-	<button id="startBtn">채팅하기</button>
+	<!-- <button id="startBtn">채팅하기</button> -->
 	
 	<!-- 채팅 구현 -->
 	<div id="chatbox">
@@ -100,6 +96,7 @@
 	
 	//전송할 문자열 기록
 	var $inputMessage = $("#inputMessage");
+	connection();
 	
 	var str = "";
 	
