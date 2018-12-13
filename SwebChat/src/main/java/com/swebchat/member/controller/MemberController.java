@@ -1,5 +1,6 @@
 package com.swebchat.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,14 +71,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/login_ok", method =RequestMethod.POST)
-	public String login_ok(MemberDTO dto, HttpSession session) {
-		MemberDTO result = service.loginMember(dto);
-
-		if (result == null) {
-			return "redirect:/login";
+	public ModelAndView login_ok(MemberDTO dto, HttpSession session, ModelAndView mav) {
+		dto = service.loginMember(dto);
+		
+		if (dto == null) {
+			mav.setViewName("redirect:/login");
+			return mav;
 		} else {
 			session.setAttribute("id", dto.getId());
-			return "/member/login_ok";
+			mav.addObject("dto", dto);
+			mav.setViewName("/member/login_ok");
+			return mav;
 		}
 	}
 
@@ -140,7 +144,20 @@ public class MemberController {
 	public String getList(HttpServletRequest req, HttpServletResponse res) throws Exception{
 		
 		List<MemberDTO> lists = service.getMemberList();
-		req.setAttribute("lists", lists);
+		
+		MemberDTO myInfo = (MemberDTO) req.getSession().getAttribute("dto");
+		System.out.println("myInfo : " + myInfo);
+		String myName = myInfo.getId();
+		
+		ArrayList<MemberDTO> list = new ArrayList<MemberDTO>();
+		
+		for(MemberDTO m : lists) {
+			if(!m.getId().equals(myName)) {
+				list.add(m);
+			}
+		}
+		
+		req.setAttribute("lists", list);
 		return "member/memberList";
 	}
 	

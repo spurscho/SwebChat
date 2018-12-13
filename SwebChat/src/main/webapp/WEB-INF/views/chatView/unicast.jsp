@@ -64,19 +64,26 @@
 	#chatbox {
 		display: none;
 	}
+	
+	#inputMessage {
+		width: 1000px;
+		height: 50px;
+		font-size: 18;
+		
+	}
 </style>
 </head>
 <body>
 	<h3>1:1 통신</h3>
-	내 ID : <input id="chatId" size="10"><br>
-	상대방 ID : <input id="recvUser" size="10"><br>
+	내 ID : ${ dto.id }<input type="hidden" id="chatId" size="10" value="${ dto.id }"><br>
+	상대방 ID : ${ yourId } <input type="hidden" id="recvUser" size="10" value="${ yourId }"><br>
 	<button id="startBtn">채팅하기</button>
 	
 	<!-- 채팅 구현 -->
 	<div id="chatbox">
 		<fieldset>
 			<div id="messageWindow"></div><br>
-			<input id="inputMessage" onkeyup="enterKey();">
+			<input id="inputMessage"  >
 			<input type="button" value="보내기" onclick="send();">
 			<input type="button" id="endBtn" value="나가기">
 			<form action="fileup" method="post" enctype="multipart/form-data" id="fileLoad">
@@ -125,41 +132,11 @@
 		};
 	}
 	
-	//엔터키 누를 때 메세지 보내기
-	function enterKey() {
-		if(window.event.keyCode == 13) {
-			send();
-		}
-	}
-	
 	function send() {
 		//메세지 입력하지 않은 경우
 		if($inputMessage.val() == "") {
 			alert("전송할 메세지를 입력하세요.");
 		} else if(str != "") {
-			/* var form = $("#fileLoad")[0];
-			var formData = new FormData(form);
-			formData.append("file", $("#file").files);
-			
-			$.ajax({
-				url: "fileup",
-				type: "post",
-				datatype: "json",
-				data: formData,
-				processData: false,
-				contentType: false,
-				success: function(data, status, xhr) {
-					console.log(data);
-					$textArea.html($textArea.html() + "<p class='chat_content'>나 : <a href=''>" + $inputMessage.val() + "</a><p><br>");
-					
-					webSocket.send($("#chatId").val() + "|" + $inputMessage.val());
-					$inputMessage.val('');
-				},
-				error: function(request, status, errorData) {
-					console.log("에러");
-				}
-			});
-			str = null; */
 			
 			ajaxFile();
 			
@@ -215,10 +192,6 @@
 		var form = $("#fileLoad");
 		var formData = new FormData($("#fileLoad"));
 		
-		//var uploadFileList = Object.keys(fileList);
-		//var fileList = new Array();
-		//fileList[$("#fileinput").files];
-		//console.log(fileList);
 		formData.append("file", $('#fileinput').prop('files')[0]);
 		
 		$.ajax({
@@ -257,21 +230,7 @@
 		webSocket.send($("#chatId").val() + " 님이 퇴장하였습니다.");
 		webSocket.close();
 	});
-	
-	/* $("#file").on("click", function() {
-		$.ajax({
-			url: "fileup",
-			type: "post",
-			dataType: "json",
-			success: function(data, status, xhr) {
-				console.log(data);
-			},
-			error: function(request, status, errorData) {
-				
-			}
-		});
-	}); */
-	
+		
 	$("#fileinput").on("change", function() {
 		str = $("#fileinput").val().split("\\");
 		tf = true;

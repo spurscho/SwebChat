@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.swebchat.member.model.dto.MemberDTO;
+
 @Controller
 public class ChatController {
 
@@ -26,10 +28,12 @@ public class ChatController {
 		
 		mav.setViewName("chatView/unicast");
 		
-		String myId = req.getParameter("myId");
+		MemberDTO myMember = (MemberDTO) req.getSession().getAttribute("dto");
+		String myId = myMember.getId();
 		String yourId = req.getParameter("yourId");
 		
-		System.out.println("myId= "+myId+", yourId= "+yourId);
+		mav.addObject("yourId", yourId);
+		
 		return mav;
 	}
 	

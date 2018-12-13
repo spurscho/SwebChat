@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@ td{
 		var f = document.sendForm;
 		var myId = f.myId.value;
 		var yourId = f.yourId.value;
-		var url = 'uni?myId='+myId+'&yourId='+yourId;
+		var url = 'uni?myId='+"${dto.id}"+'&yourId='+yourId;
         opener.location.href=url;
 		window.close();
 		
