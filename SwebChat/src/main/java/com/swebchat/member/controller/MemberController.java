@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.swebchat.member.model.dto.MemberDTO;
@@ -73,22 +74,21 @@ public class MemberController {
 	@RequestMapping(value="/login_ok", method =RequestMethod.POST)
 	public ModelAndView login_ok(MemberDTO dto, HttpSession session, ModelAndView mav) {
 		dto = service.loginMember(dto);
-		
+		System.out.println("dto : " + dto);
 		if (dto == null) {
 			mav.setViewName("redirect:/login");
 			return mav;
 		} else {
 			session.setAttribute("id", dto.getId());
 			mav.addObject("dto", dto);
-			mav.setViewName("/member/login_ok");
+			mav.setViewName("redirect:/list");
 			return mav;
 		}
 	}
 
 	@RequestMapping(value="/logout", method=RequestMethod.GET)	
-	public String logout(HttpSession session) {
-		session.removeAttribute("id");
-		session.invalidate();
+	public String logout(SessionStatus status) {
+		status.setComplete();
 		return "redirect:/login";
 	}
 
@@ -141,7 +141,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("/list")
-	public String getList(HttpSession session,MemberDTO dto,HttpServletRequest req, HttpServletResponse res) throws Exception{
+	public String getList(HttpSession session, MemberDTO dto,HttpServletRequest req, HttpServletResponse res) throws Exception{
 		MemberDTO result = service.loginMember(dto);
 		
 		List<MemberDTO> lists = service.getMemberList();
@@ -159,6 +159,7 @@ public class MemberController {
 		}
 		
 		req.setAttribute("lists", list);
+		req.setAttribute("myId", myName);
 		return "member/memberList";
 	}
 	

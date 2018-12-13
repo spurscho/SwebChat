@@ -74,7 +74,6 @@
 </style>
 </head>
 <body>
-	<h3>1:1 통신</h3>
 	내 ID : ${ dto.id }<input type="hidden" id="chatId" size="10" value="${ dto.id }"><br>
 	상대방 ID : ${ yourId } <input type="hidden" id="recvUser" size="10" value="${ yourId }"><br>
 	<button id="startBtn">채팅하기</button>
@@ -107,10 +106,12 @@
 	var tf = "";
 	var filen = "";
 	
+	var fileList = new Array();
+	
 	function connection() {
 		//웹소켓 객체는 생성자를 통해 생성, 객체 생성시에 서버와 자동 연결
 		
-		webSocket = new WebSocket("ws://192.168.0.82:8880<%= request.getContextPath() %>/unicast");
+		webSocket = new WebSocket("ws://192.168.0.191:8880<%= request.getContextPath() %>/unicast");
 		
 		//웹소켓을 통해서 연결이 될 때 동작할 이벤트 핸들러
 		webSocket.onopen = function(e) {
@@ -204,6 +205,8 @@
 			success: function(data, status, xhr) {
 				filen = data.fileName;
 				console.log(filen);
+				fileList[filen];
+				console.log(fileList)
 				$textArea.html($textArea.html() + "<p class='chat_content'>나 : "
 					+ "<a href='mfdown?ofile=" + data.fileName + "'>" + $inputMessage.val() + "</a><p><br>");
 				
@@ -225,10 +228,9 @@
 	
 	//나기기 버튼 클릭시 소켓 닫기
 	$("#endBtn").on("click", function() {
-		$("chatbox").css("display", "none");
-		$("#startBtn").css("display", "inline");
 		webSocket.send($("#chatId").val() + " 님이 퇴장하였습니다.");
 		webSocket.close();
+		location.href="list";
 	});
 		
 	$("#fileinput").on("change", function() {
