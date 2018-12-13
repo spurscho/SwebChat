@@ -68,18 +68,6 @@ public class MemberController {
 		
 		return "member/login";
 	}
-	
-	@RequestMapping(value="/login_ok", method =RequestMethod.POST)
-	public String login_ok(MemberDTO dto, HttpSession session) {
-		MemberDTO result = service.loginMember(dto);
-
-		if (result == null) {
-			return "redirect:/login";
-		} else {
-			session.setAttribute("id", dto.getId());
-			return "/member/login_ok";
-		}
-	}
 
 	@RequestMapping(value="/logout", method=RequestMethod.GET)	
 	public String logout(HttpSession session) {
@@ -137,11 +125,17 @@ public class MemberController {
 	}
 
 	@RequestMapping("/list")
-	public String getList(HttpServletRequest req, HttpServletResponse res) throws Exception{
+	public String getList(HttpSession session,MemberDTO dto,HttpServletRequest req, HttpServletResponse res) throws Exception{
+		MemberDTO result = service.loginMember(dto);
 		
-		List<MemberDTO> lists = service.getMemberList();
-		req.setAttribute("lists", lists);
-		return "member/memberList";
+		if(result == null) {
+			return "redirect:/login";
+		}else {
+			session.setAttribute("myId", dto.getId());
+			List<MemberDTO> lists = service.getMemberList();
+			req.setAttribute("lists", lists);
+			return "member/memberList";
+		}
 	}
 	
 	@RequestMapping("/applyChatPopup")
