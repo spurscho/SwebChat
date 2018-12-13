@@ -85,7 +85,7 @@
 		}
 	}
 </script>
-<title>Insert title here</title>
+<title>SwebChat - JOIN</title>
 </head>
 <body>
 

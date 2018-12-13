@@ -69,7 +69,6 @@ public class MemberController {
 		
 		return "member/login";
 	}
-	
 	@RequestMapping(value="/login_ok", method =RequestMethod.POST)
 	public ModelAndView login_ok(MemberDTO dto, HttpSession session, ModelAndView mav) {
 		dto = service.loginMember(dto);
@@ -111,7 +110,7 @@ public class MemberController {
 		dto.setId(id);
 		service.updateMember(dto);
 		
-		return "member/updated_ok";
+		return "redirect:/list";
 	}
 	
 	@RequestMapping(value="/deleted" , method=RequestMethod.GET)
@@ -141,7 +140,8 @@ public class MemberController {
 	}
 
 	@RequestMapping("/list")
-	public String getList(HttpServletRequest req, HttpServletResponse res) throws Exception{
+	public String getList(HttpSession session,MemberDTO dto,HttpServletRequest req, HttpServletResponse res) throws Exception{
+		MemberDTO result = service.loginMember(dto);
 		
 		List<MemberDTO> lists = service.getMemberList();
 		

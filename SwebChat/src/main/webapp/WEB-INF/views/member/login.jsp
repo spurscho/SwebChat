@@ -34,7 +34,7 @@
 		$("#myForm").submit();	
 	}
 </script>
-<title>Insert title here</title>
+<title>SwebChat - LOGIN</title>
 </head>
 <body>
 
@@ -60,7 +60,7 @@
 		<div class="col-md-4 col-md-offset-4">
 	
 		<!-- Start Sign In Form -->
-			<form action="/swebchat/login_ok" method="post" id="myForm" name="myForm" class="fh5co-form animate-box" data-animate-effect="fadeIn">
+			<form action="list" method="post" id="myForm" name="myForm" class="fh5co-form animate-box" data-animate-effect="fadeIn">
 				<h2>Sign In</h2>
 				<div class="form-group">
 					<label for="username" class="sr-only">UserID</label>

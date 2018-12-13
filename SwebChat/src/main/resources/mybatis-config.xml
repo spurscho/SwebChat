@@ -9,8 +9,4 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	
-	<typeAliases>
-		<typeAlias type="com.swebchat.member.model.dto.MemberDTO" alias="MemberDTO" />
-	</typeAliases>
-	
 </configuration>
