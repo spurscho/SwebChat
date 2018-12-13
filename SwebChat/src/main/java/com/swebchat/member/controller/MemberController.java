@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.annotation.Commit;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,12 +36,14 @@ public class MemberController {
 		return mav;
 	}
 	
+	//회원가입
 	@RequestMapping(value="/join")
 	public String insertMember(HttpSession session) {
 		
 		return "/member/join";
 	}
 	
+	//중복체크
 	@RequestMapping(value="/checkUserId")
 	@ResponseBody
 	public Map<Object, Object> checkUserID(@RequestBody String id) throws Exception {
