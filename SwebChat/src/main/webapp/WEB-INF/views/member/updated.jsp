@@ -72,6 +72,7 @@ function updated(){
 					</div>
 					<div class="form-group">
 						<input type="button" value="Update" class="btn btn-primary" onclick="updated();">
+						<a href="list"><input type="button" value="Cancel" class="btn btn-primary"></a>
 					</div>
 				</form>
 
