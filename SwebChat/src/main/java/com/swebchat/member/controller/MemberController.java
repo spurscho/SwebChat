@@ -68,6 +68,17 @@ public class MemberController {
 		
 		return "member/login";
 	}
+	@RequestMapping(value="/login_ok", method =RequestMethod.POST)
+	public String login_ok(MemberDTO dto, HttpSession session) {
+		MemberDTO result = service.loginMember(dto);
+
+		if (result == null) {
+			return "redirect:/login";
+		} else {
+			session.setAttribute("id", dto.getId());
+			return "redirect:/list";
+		}
+	}
 
 	@RequestMapping(value="/logout", method=RequestMethod.GET)	
 	public String logout(HttpSession session) {
@@ -95,7 +106,7 @@ public class MemberController {
 		dto.setId(id);
 		service.updateMember(dto);
 		
-		return "member/updated_ok";
+		return "redirect:/list";
 	}
 	
 	@RequestMapping(value="/deleted" , method=RequestMethod.GET)
