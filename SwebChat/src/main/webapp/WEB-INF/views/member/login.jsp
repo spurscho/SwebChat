@@ -34,7 +34,7 @@
 		$("#myForm").submit();	
 	}
 </script>
-<title>Insert title here</title>
+<title>SwebChat - LOGIN</title>
 </head>
 <body>
 

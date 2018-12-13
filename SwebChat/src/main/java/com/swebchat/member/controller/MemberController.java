@@ -77,7 +77,7 @@ public class MemberController {
 			return "redirect:/login";
 		} else {
 			session.setAttribute("id", dto.getId());
-			return "/member/login_ok";
+			return "redirect:/list";
 		}
 	}
 
@@ -107,7 +107,7 @@ public class MemberController {
 		dto.setId(id);
 		service.updateMember(dto);
 		
-		return "member/updated_ok";
+		return "redirect:/list";
 	}
 	
 	@RequestMapping(value="/deleted" , method=RequestMethod.GET)

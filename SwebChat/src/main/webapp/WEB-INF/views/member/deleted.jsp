@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/css/animate.css">
 <link rel="stylesheet" href="./resources/css/style.css">
-<title>Insert title here</title>
+<title>SwebChat - LEAVE</title>
 </head>
 <script type="text/javascript">
 function deleted() {
