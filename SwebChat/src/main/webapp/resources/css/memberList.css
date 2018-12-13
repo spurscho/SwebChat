@@ -1,5 +1,7 @@
 @charset "UTF-8";
-body {background:#e2e2e2;}
+body {
+	background:#e2e2e2;
+	overflow-x:hidden; overflow-y:auto;}
 /********card frame **************/
 .card {position: relative; border-radius: 3px; background-color: #fff;color: #4f5256;border: 1px solid #f2f2f2;margin-bottom: 16px;background:#fff;}
 .card-header{ padding: 16px;margin:0px;}
@@ -40,4 +42,10 @@ body {background:#e2e2e2;}
   color: #ffffff;
   background: #47d1d1 !important;
   outline: none;
+}
+
+.align {
+   margin: 0px 0px 0px 450px;
+   padding: 0px 0px;
+
 }

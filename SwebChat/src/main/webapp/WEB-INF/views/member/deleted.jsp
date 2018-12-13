@@ -69,7 +69,7 @@ function deleted() {
 					</div>
 					<div class="form-group">
 						<input type="button" value="Leave" class="btn btn-primary" onclick="deleted();">
-						<a href="#"><input type="button" value="Cancel" class="btn btn-primary"></a>
+						<a href="list"><input type="button" value="Cancel" class="btn btn-primary"></a>
 					</div>
 				</form>
 

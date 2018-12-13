@@ -68,7 +68,7 @@
 	  </div>
 	</nav>
 	<br/><br/>
-	<div class="container">
+	<div class="container align">
 		<div class="row">
 		<c:forEach items="${lists }" var="dto">
 			<div class="col-md-7">
